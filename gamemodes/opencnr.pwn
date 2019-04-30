@@ -53,6 +53,7 @@
 #include <vehicles>
 #include <knockout>
 #include <nametag>
+#include <airdrop>
 
 #if defined DEV_BUILD
     #include <dev-tools>

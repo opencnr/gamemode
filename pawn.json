@@ -37,7 +37,8 @@
 				"gamemodes/opencnr/prison",
 				"gamemodes/opencnr/player",
 				"gamemodes/opencnr/knockout",
-				"gamemodes/opencnr/nametag"
+				"gamemodes/opencnr/nametag",
+				"gamemodes/opencnr/airdrop"
 			],
 			"constants": {
 				"DEV_BUILD": "1"
@@ -59,7 +60,8 @@
 				"gamemodes/opencnr/prison",
 				"gamemodes/opencnr/player",
 				"gamemodes/opencnr/knockout",
-				"gamemodes/opencnr/nametag"
+				"gamemodes/opencnr/nametag",
+				"gamemodes/opencnr/airdrop"
 			]
 		}
 	],
