@@ -57,7 +57,7 @@
 				"gamemodes/opencnr/vehicles",
 				"gamemodes/opencnr/portals",
 				"gamemodes/opencnr/prison",
-				"gamemodes/opencnr/player-lifecycle",
+				"gamemodes/opencnr/player",
 				"gamemodes/opencnr/knockout",
 				"gamemodes/opencnr/nametag"
 			]
