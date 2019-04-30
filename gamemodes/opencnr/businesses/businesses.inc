@@ -136,24 +136,29 @@ hook OnPlayerEnterBuilding(playerid, portalID)
     if(businessID != -1)
     {
         playerInBusiness[playerid] = businessID;
+        CallLocalFunction("OnPlayerEnterBusiness", "dd", playerid, businessID);
     }
 
-    CallLocalFunction("OnPlayerEnterBusiness", "dd", playerid, businessID);
     return 1;
 }
 
 hook OnPlayerExitBuilding(playerid)
 {
-    CallLocalFunction("OnPlayerExitBusiness", "d", playerid);
-
-    playerInBusiness[playerid] = -1;
+    PlayerExitBuilding(playerid);
     return 1;
 }
 
 hook OnPlayerPosSet(playerid)
 {
-    CallLocalFunction("OnPlayerExitBusiness", "d", playerid);
-    
-    playerInBusiness[playerid] = -1;
+    PlayerExitBuilding(playerid);
     return 1;
+}
+
+static PlayerExitBuilding(playerid)
+{
+    if(playerInBusiness[playerid] != -1)
+    {
+        CallLocalFunction("OnPlayerExitBusiness", "d", playerid);
+        playerInBusiness[playerid] = -1;
+    }
 }

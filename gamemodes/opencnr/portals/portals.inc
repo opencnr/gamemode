@@ -1,5 +1,5 @@
-// The portals package handles portal (Enter/Exit pickups) initialization
-// and provides an API for portal manipulation.
+// The portals package handles portal (Enter/Exit pickups) initialization and
+// provides an API for portal manipulation.
 
 // -
 // Internal Packages
