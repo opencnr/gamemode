@@ -38,7 +38,8 @@
 				"gamemodes/opencnr/player",
 				"gamemodes/opencnr/knockout",
 				"gamemodes/opencnr/nametag",
-				"gamemodes/opencnr/airdrop"
+				"gamemodes/opencnr/airdrop",
+				"gamemodes/opencnr/world"
 			],
 			"constants": {
 				"DEV_BUILD": "1"
@@ -61,7 +62,8 @@
 				"gamemodes/opencnr/player",
 				"gamemodes/opencnr/knockout",
 				"gamemodes/opencnr/nametag",
-				"gamemodes/opencnr/airdrop"
+				"gamemodes/opencnr/airdrop",
+				"gamemodes/opencnr/world"
 			]
 		}
 	],

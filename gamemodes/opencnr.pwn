@@ -48,6 +48,7 @@
 
 #include <storage>
 #include <anticheat>
+#include <world>
 #include <player>
 #include <businesses>
 #include <vehicles>
