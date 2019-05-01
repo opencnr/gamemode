@@ -58,6 +58,13 @@ static Float:movetoX, Float:movetoY;
 
 #include <YSI\y_hooks>
 
+hook OnGameModeInit()
+{
+    // Setting default values.
+    airdropRewardPickup = -1;
+    return 1;
+}
+
 static InitializeAirdrop()
 {
     if(airdropObjectID == -1)
