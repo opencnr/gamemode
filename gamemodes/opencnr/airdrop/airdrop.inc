@@ -47,7 +47,8 @@ static
     airdropMapIcon,
     flareObjectID,
     airdropObjectID = -1,
-    airdropQueue;
+    airdropQueue,
+    airdropRewardPickup;
 
 static Float:movetoX, Float:movetoY;
 
@@ -119,7 +120,13 @@ task UpdateAirdropTimer[1000]()
             airdropObjectID = -1;
             flareObjectID = -1;
 
-            CreatePickup(1550, 1, airdropX, airdropY, destinationZ);
+            // Destroy the previous reward pickup if it hasn't been collected
+            // yet.
+            if(IsValidPickup(airdropRewardPickup))
+            {
+                DestroyPickup(airdropRewardPickup);
+            }
+            airdropRewardPickup = CreatePickup(1550, 1, airdropX, airdropY, destinationZ);
 
             DestroyDynamicMapIcon(airdropMapIcon);
 
@@ -136,7 +143,7 @@ task UpdateAirdropTimer[1000]()
 
 hook OnPlayerPickUpPickup(playerid, pickupid)
 {
-    if(GetPickupModel(pickupid) == 1550)
+    if(pickupid == airdropRewardPickup)
     {
         GivePlayerServerMoney(playerid, 3500);
         PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
