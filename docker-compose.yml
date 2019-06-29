@@ -21,11 +21,13 @@ services:
 
   # MySQL Database
   samp_db:
-    image: mysql                        # Latest MySQL runtime as parent image
-    command:                            # Disable caching_sha2_password plugin to allow SA-MP server to connect
+    image: mysql                      # Latest MySQL runtime as parent image
+    command:                          # Disable caching_sha2_password plugin to allow SA-MP server to connect
       --default-authentication-plugin=mysql_native_password
-    container_name: samp_db             # Container name
-    environment:                        # Add environment variables
+    volumes:                          # Bind mount for file './sql.sql' on host to file '/docker-entrypoint-initdb.d/sql.sql' in container
+      - ./sql.sql:/docker-entrypoint-initdb.d/sql.sql
+    container_name: samp_db           # Container name
+    environment:                      # Add environment variables
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: samp
       MYSQL_PASSWORD: test_password
