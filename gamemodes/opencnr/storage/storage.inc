@@ -7,11 +7,26 @@
 #include <a_mysql>
 #include <env>
 
+#include <YSI\y_timers>
+
 // -
 // API
 // -
 
+// OnDatabaseConnected is called when the connection to the has been
+// succsesfully made.
+forward OnDatabaseConnected();
+
 new MySQL:db_handle;
+
+// -
+// Declarations
+// -
+
+#define DB_CONNECTION_ATTEMPTS  25
+#define DB_CONNECTION_INTERVAL  5000
+
+static connectionAttempts;
 
 // -
 // Internal
@@ -22,6 +37,38 @@ new MySQL:db_handle;
 #include <YSI\y_hooks>
 
 hook OnGameModeInit()
+{
+    defer AttemptDatabaseConnection();
+    return 1;
+}
+
+timer AttemptDatabaseConnection[DB_CONNECTION_INTERVAL]()
+{
+    if(connectionAttempts <= DB_CONNECTION_ATTEMPTS)
+    {
+        connectionAttempts++;
+
+        print("Attempting to connect to the database...");
+
+        if(ConnectToDatabase())
+        {
+            print("Connection to the database has been established!");
+            CallLocalFunction("OnDatabaseConnected", "");
+        }
+        else
+        {
+            defer AttemptDatabaseConnection();
+        }
+    }
+    else
+    {
+        print("Failed to connect to the database! Exiting...");
+        SendRconCommand("exit");
+    }
+}
+
+// Attempts to connect to the database and returns 0 if it fails to do so.
+static ConnectToDatabase()
 {
     new ret, mysqlHost[128], mysqlUser[128], mysqlPassword[128], mysqlDatabase[128];
     ret = GetEnv("MYSQL_HOST", mysqlHost);
@@ -40,8 +87,8 @@ hook OnGameModeInit()
 
     if(mysql_errno(db_handle) != 0)
     {
-        print("[ERROR] Could not connect to database. Exiting...");
-        SendRconCommand("exit");
+        mysql_close(db_handle);
+        return 0;
     }
 
     return 1;

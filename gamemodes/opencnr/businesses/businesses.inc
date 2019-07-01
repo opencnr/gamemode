@@ -78,7 +78,7 @@ stock IsPlayerInsideBusiness(playerid)
 #include "businesses-robbery"
 #include <YSI\y_hooks>
 
-hook OnGameModeInit()
+hook OnDatabaseConnected()
 {
     LoadBusinesses(db_handle);
     return 1;

@@ -4,12 +4,10 @@ services:
 
   # SA-MP Server
   samp:
-    image: southclaws/sampctl         # Latest sampctl runtime as parent image
+    build: .                          # Build image from Dockerfile
     entrypoint: sampctl p run         # Start server
     ports:
       - "7777:7777/udp"               # Expose port 7777 to allow UDP connections form outside container
-    volumes:
-      - .:/samp                       # Bind mount for directory '.' on host to directory '/samp' in container
     depends_on:
       - samp_db                       # Mark container service 'samp_db' as dependency
     container_name: samp              # Container name
