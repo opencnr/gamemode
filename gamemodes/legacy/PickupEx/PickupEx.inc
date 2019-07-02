@@ -105,12 +105,9 @@ stock GetPickupPos(pickupid, &Float:x, &Float:y, &Float:z)
 
 stock IsValidPickup(pickupid)
 {
-    if(pickupid <= MAX_PICKUPS && pickupid >= 0)
+    if(pickupid > MAX_PICKUPS || pickupid < 0 || pickupInfoArray[pickupid][pModel] == 0)
     {
-        if(pickupInfoArray[pickupid][pModel] == 0)
-        {
-            return 0;
-        }
+        return 0;
     }
 
     return 1;
