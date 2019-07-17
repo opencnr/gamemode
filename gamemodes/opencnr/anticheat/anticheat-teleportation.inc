@@ -2,12 +2,6 @@
 // players location and hooks the native position manipulation functions.
 
 // -
-// Internal Packages
-// -
-
-#include <utils>
-
-// -
 // External Packages
 // -
 
@@ -33,6 +27,12 @@ static bool:justTeleported[MAX_PLAYERS];
 // Hooks
 static NativeHook:hookv_SetPlayerPos;
 static NativeHook:hookv_PutPlayerInVehicle;
+
+// -
+// Internal Packages
+// -
+
+#include <utils>
 
 // -
 // API

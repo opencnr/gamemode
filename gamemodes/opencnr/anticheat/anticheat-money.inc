@@ -3,16 +3,16 @@
 // the players server-sided money.
 
 // -
-// Internal Packages
-// -
-
-#include <player>
-
-// -
 // External Packages
 // -
 
 #include <YSI\y_timers>
+
+// -
+// Internal Packages
+// -
+
+#include <player>
 
 // -
 // API

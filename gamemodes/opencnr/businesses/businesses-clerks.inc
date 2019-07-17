@@ -3,12 +3,6 @@
 // clerk actor.
 
 // -
-// Internal Packages
-// -
-
-#include <portals>
-
-// -
 // Declarations
 // -
 
@@ -39,6 +33,12 @@ static bool:isActorClerk[MAX_ACTORS];
 
 // Player variables
 static playerAimAtClerkCooldown[MAX_PLAYERS];
+
+// -
+// Internal Packages
+// -
+
+#include <portals>
 
 // -
 // API

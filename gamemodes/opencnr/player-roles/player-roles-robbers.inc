@@ -64,7 +64,7 @@ public hookf_SetPlayerWantedLevel(playerid, level)
     return SetPlayerWantedLevel(playerid, level);
 }
 
-hook OnPlayerSelectedRole(playerid, role)
+hook OnPlayerSetRole(playerid, role)
 {
     if(role == PLAYER_ROLE_ROBBER)
     {

@@ -2,13 +2,6 @@
 // care of loading and storing player data and provides the playerData array.
 
 // -
-// Internal Packages
-// -
-
-#include <class-selection>
-#include <storage>
-
-// -
 // External Packages
 // -
 
@@ -27,6 +20,16 @@ enum E_PLAYER
 
 // Player variables
 new playerData[MAX_PLAYERS][E_PLAYER];
+
+// -
+// Internal Packages
+// -
+
+#include <player-roles>
+#include <player-knockout>
+#include <player-class-selection>
+#include <player-prison>
+#include <player-nametag>
 
 // -
 // Internal
@@ -74,7 +77,8 @@ static StorePlayerData(playerid)
 {
     StoreUser(db_handle,
         playerData[playerid][E_PLAYER_USER_ID],
-        playerData[playerid][E_PLAYER_MONEY]
+        playerData[playerid][E_PLAYER_MONEY],
+        GetPlayerWantedLevel(playerid)
     );
 }
 

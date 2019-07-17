@@ -3,14 +3,6 @@
 // to businesses.
 
 // -
-// Internal Packages
-// -
-
-#include <anticheat>
-#include <storage>
-#include <portals>
-
-// -
 // External Packages
 // -
 
@@ -34,6 +26,12 @@ new Iterator:Business<MAX_BUSINESSES>;
 
 // Player variables
 static playerInBusiness[MAX_PLAYERS];
+
+// -
+// Internal Packages
+// -
+
+#include <portals>
 
 // -
 // API

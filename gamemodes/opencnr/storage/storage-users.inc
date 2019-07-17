@@ -47,12 +47,12 @@ stock LoadUser(MySQL:handle, playerid)
 
 // StoreUser updates the users information in the database with the information
 // specified by arguments.
-stock StoreUser(MySQL:handle, userid, money)
+stock StoreUser(MySQL:handle, userid, money, wanted_level)
 {
     new query[100];
     mysql_format(handle, query, sizeof query,
-        "UPDATE users SET `money`='%d' WHERE `id`='%d';",
-        money, userid
+        "UPDATE users SET `money`='%d', `wanted_level`='%d' WHERE `id`='%d';",
+        money, wanted_level, userid
     );
     mysql_query(handle, query);
 }
@@ -84,4 +84,19 @@ stock GetUserHash(MySQL:handle, playerid, dest[], maxLength = sizeof dest)
     cache_get_value_index(0, 0, dest, maxLength);
 
     cache_delete(cache);
+}
+
+// GetUserWantedLevel retrieves the users wanted level from the database and
+// returns it.
+stock GetUserWantedLevel(MySQL:handle, userid)
+{
+    new query[75], wanted_level;
+    mysql_format(handle, query, sizeof query, "SELECT `wanted_level` FROM `users` WHERE `id` = '%d';", userid);
+    new Cache:cache = mysql_query(handle, query);
+
+    cache_get_value_index_int(0, 0, wanted_level);
+
+    cache_delete(cache);
+
+    return wanted_level;
 }

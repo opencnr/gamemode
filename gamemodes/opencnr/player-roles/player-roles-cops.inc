@@ -5,8 +5,8 @@
 // Internal Packages
 // -
 
-#include <knockout>
-#include <prison>
+#include <player-knockout>
+#include <player-prison>
 #include <utils>
 
 // -
@@ -50,7 +50,7 @@ stock IsPoliceVehicle(vehicleid)
 
 #include <YSI\y_hooks>
 
-hook OnPlayerSelectedRole(playerid, role)
+hook OnPlayerSetRole(playerid, role)
 {
     if(role == PLAYER_ROLE_COP)
     {

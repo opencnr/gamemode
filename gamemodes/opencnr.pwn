@@ -52,8 +52,6 @@
 #include <player>
 #include <businesses>
 #include <vehicles>
-#include <knockout>
-#include <nametag>
 #include <airdrop>
 
 #if defined DEV_BUILD

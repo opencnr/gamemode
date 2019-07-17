@@ -1,18 +1,18 @@
 // The airdrop package spawns and handles airdrops.
 
 // -
-// Internal Packages
-// -
-
-#include <anticheat>
-
-// -
 // External Packages
 // -
 
 #include <streamer>
 #include <YSI\y_timers>
 #include <PickupEx>
+
+// -
+// Internal Packages
+// -
+
+#include <anticheat>
 
 // -
 // Declarations

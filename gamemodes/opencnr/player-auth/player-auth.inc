@@ -1,10 +1,4 @@
-// The player-auth packages handles user authentication.
-
-// -
-// Internal Packages
-// -
-
-#include <storage>
+// The player-auth packages handle user authentication.
 
 // -
 // Declarations

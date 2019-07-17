@@ -2,17 +2,11 @@
 // role-related information.
 
 // -
-// Internal Packages
-// -
-
-#include <knockout>
-#include <prison>
-
-// -
 // External Packages
 // -
 
 #include <Pawn.CMD>
+#include <easyDialog>
 
 // -
 // Declarations
@@ -29,12 +23,18 @@ static playerRole[MAX_PLAYERS];
 static lastRoleChange[MAX_PLAYERS];
 
 // -
+// Internal Packages
+// -
+
+#include <player-knockout>
+#include <player-prison>
+
+// -
 // API
 // -
 
-// OnPlayerSelectedRole is called when a player has selected a role from the
-// role-selection dialog.
-forward OnPlayerSelectedRole(playerid, role);
+// OnPlayerSetRole is called when a players role has been set by SetPlayerRole.
+forward OnPlayerSetRole(playerid, role);
 
 // PromptRoleSelection prompts the role/class selection dialog where the user
 // can select his role.
@@ -45,6 +45,15 @@ stock PromptRoleSelection(playerid)
         "Cop\nRobber",
         "Spawn", "Exit"
     );
+}
+
+// SetPlayerRole sets the specified players role.
+stock SetPlayerRole(playerid, role)
+{
+    playerRole[playerid] = role;
+    lastRoleChange[playerid] = gettime();
+
+    CallLocalFunction("OnPlayerSetRole", "dd", playerid, role);
 }
 
 // GetPlayerRole returns the specified users role ID.
@@ -73,8 +82,8 @@ stock GetRolePlayerCount(roleID)
 // Internal
 // -
 
-#include "roles-cops"
-#include "roles-robbers"
+#include "player-roles-cops"
+#include "player-roles-robbers"
 #include <YSI\y_hooks>
 
 hook OnPlayerConnect(playerid)
@@ -100,10 +109,7 @@ Dialog:OnRoleDialog(playerid, response, listitem, inputtext[])
                     {
                         if(!IsPlayerArrested(playerid))
                         {
-                            playerRole[playerid] = listitem;
-                            lastRoleChange[playerid] = gettime();
-
-                            CallLocalFunction("OnPlayerSelectedRole", "dd", playerid, listitem);
+                            SetPlayerRole(playerid, listitem);
                         }
                         else
                         {

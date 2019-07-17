@@ -2,12 +2,6 @@
 // provides an API for portal manipulation.
 
 // -
-// Internal Packages
-// -
-
-#include <anticheat>
-
-// -
 // External Packages
 // -
 
@@ -47,6 +41,12 @@ new Iterator:Portal<MAX_PORTALS>;
 
 // Player variables
 static playerEntranceCoords[MAX_PLAYERS][E_ENTRANCE_COORDS];
+
+// -
+// Internal Packages
+// -
+
+#include <anticheat>
 
 // -
 // API

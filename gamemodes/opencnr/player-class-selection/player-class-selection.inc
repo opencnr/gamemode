@@ -1,18 +1,19 @@
-// The class-selection package is a dependency of the player-lifecycle package
-// and handles the class-selection flow.
-
-// -
-// Internal Packages
-// -
-
-#include <player-auth>
-#include <roles>
+// The class-selection package is a dependency of the player package and handles
+// the class-selection flow.
 
 // -
 // External Packages
 // -
 
 #include <YSI\y_timers>
+
+// -
+// Internal Packages
+// -
+
+#include <player-roles>
+
+#include <player-auth>
 
 // -
 // Internal
@@ -52,11 +53,22 @@ hook OnPlayerSpawn(playerid)
 
 hook OnPlayerAuthenticated(playerid)
 {
-    PromptRoleSelection(playerid);
+    new wantedLevel = GetUserWantedLevel(db_handle, playerData[playerid][E_PLAYER_USER_ID]);
+    
+    if(wantedLevel > 0)
+    {
+        SetPlayerRole(playerid, PLAYER_ROLE_ROBBER);
+        SetPlayerWantedLevel(playerid, wantedLevel);
+    }
+    else
+    {
+        PromptRoleSelection(playerid);
+    }
+
     return 1;
 }
 
-hook OnPlayerSelectedRole(playerid, role)
+hook OnPlayerSetRole(playerid, role)
 {
     if(IsPlayerInAnyVehicle(playerid))
     {

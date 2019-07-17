@@ -23,8 +23,6 @@ Modules that aren't main modules are called sub-modules. These modules must be n
 
 ## Code structure
 - Description of package or module
-- Internal Packages
-    - Internal packages are all packages from the game-mode itself that this package depends on.
 - External Packages
     - External packages are all non-game-mode packages (Includes, Plugins) that this package depends on.
 - Declarations
@@ -33,6 +31,8 @@ Modules that aren't main modules are called sub-modules. These modules must be n
         - `// Player variables`
     - There is a sub-section for NativeHook variables (PawnPlus).
         - `// Hooks`
+- Internal Packages
+    - Internal packages are all packages from the game-mode itself that this package depends on and vice versa.
 - API
     - This part contains code that’ll be used by other packages. 
     - All functions and forwards must be documented.

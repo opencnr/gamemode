@@ -1,13 +1,6 @@
 // The businesses-robbery module handles business robberies.
 
 // -
-// Internal Packages
-// -
-
-#include <anticheat>
-#include <roles>
-
-// -
 // External Packages
 // -
 
@@ -24,6 +17,13 @@
 static playerRobbingBusiness[MAX_PLAYERS];
 static Float:robberyProgress[MAX_PLAYERS];
 static PlayerBar:playerRobberyProgressbar[MAX_PLAYERS];
+
+// -
+// Internal Packages
+// -
+
+#include <anticheat>
+#include <player-roles>
 
 // -
 // Internal

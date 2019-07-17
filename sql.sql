@@ -4,6 +4,7 @@ CREATE TABLE `users` (
   `username` varchar(25) NOT NULL,
   `password` varchar(60) NOT NULL,
   `money` int(11) DEFAULT '100',
+  `wanted_level` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
 

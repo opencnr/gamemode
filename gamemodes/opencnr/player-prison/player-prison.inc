@@ -5,9 +5,8 @@
 // Internal Packages
 // -
 
-#include <anticheat>
-#include <knockout>
-#include <roles>
+#include <player-knockout>
+#include <player-roles>
 
 // -
 // External Packages

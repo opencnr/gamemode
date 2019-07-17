@@ -2,12 +2,6 @@
 // about to die and handles respawning.
 
 // -
-// Internal Packages
-// -
-
-#include <anticheat>
-
-// -
 // External Packages
 // -
 
