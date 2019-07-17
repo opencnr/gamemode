@@ -7,6 +7,8 @@
 #undef MAX_PLAYERS
 #define MAX_PLAYERS (32)
 
+#define OPENCNR_VERSION "Alpha R1"
+
 // -
 // Macros
 // -
@@ -30,10 +32,12 @@
 #define COLOR_ERROR     0xFC3F3FFF
 #define COLOR_INFO      0x2ABAFCFF
 #define COLOR_DEFAULT   0xA9C4E4FF
+#define COLOR_DEFAULT2  0xB9C9BFFF
 
 #define SCOLOR_ERROR    "{FC3F3F}"
 #define SCOLOR_INFO     "{2ABAFC}"
-#define SCOLOR_DEFAULT	"{A9C4E4}"
+#define SCOLOR_DEFAULT  "{A9C4E4}"
+#define SCOLOR_DEFAULT2 "{B9C9BF}"
 
 // -
 // Externals
@@ -62,7 +66,7 @@
 
 hook OnGameModeInit()
 {
-    SetGameModeText("OpenCnR Alpha R1");
+    SetGameModeText("OpenCnR "OPENCNR_VERSION);
     EnableStuntBonusForAll(0);
     UsePlayerPedAnims();
     return 1;

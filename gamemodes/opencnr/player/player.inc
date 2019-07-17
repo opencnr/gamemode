@@ -39,6 +39,9 @@ new playerData[MAX_PLAYERS][E_PLAYER];
 
 hook OnPlayerConnect(playerid)
 {
+    // Please have some respect and do NOT modify, remove or hide this message.
+    SendClientMessage(playerid, COLOR_DEFAULT, "This server runs on "SCOLOR_DEFAULT2"OpenCnR "OPENCNR_VERSION);
+
     // Initializing and resetting player variables.
     LoadUser(db_handle, playerid);
 
