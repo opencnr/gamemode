@@ -14,7 +14,7 @@ services:
     environment:                      # Add environment variables
       MYSQL_HOST: samp_db             # Use container name 'samp_db' of container service 'samp_db' as database host
       MYSQL_USER: samp
-      MYSQL_PASSWORD: test_password
+      MYSQL_PASSWORD: db_password
       MYSQL_DATABASE: cnr
 
   # MySQL Database
@@ -28,7 +28,7 @@ services:
     environment:                      # Add environment variables
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: samp
-      MYSQL_PASSWORD: test_password
+      MYSQL_PASSWORD: db_password
       MYSQL_DATABASE: cnr
 
 # Command to start all services at once

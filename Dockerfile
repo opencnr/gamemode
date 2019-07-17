@@ -1,4 +1,9 @@
 FROM southclaws/sampctl:1.8.39
-COPY . /samp
+
 WORKDIR /samp
-RUN sampctl p ensure && sampctl p build
+
+COPY ./pawn.json /samp/pawn.json
+RUN sampctl p ensure
+
+COPY . /samp
+RUN sampctl p build
