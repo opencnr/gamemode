@@ -50,8 +50,6 @@ static
     airdropQueue,
     airdropRewardPickup;
 
-static Float:movetoX, Float:movetoY;
-
 // -
 // Internal
 // -
@@ -117,7 +115,7 @@ task UpdateAirdropTimer[1000]()
         if(airdropZ > destinationZ)
         {
             airdropZ -= 1.0;
-            MoveObject(airdropObjectID, airdropX + movetoX, airdropY + movetoY, airdropZ + AIRDROP_OFFSET, 1.0, 0.0, 0.0, 0.0);
+            MoveObject(airdropObjectID, airdropX, airdropY, airdropZ + AIRDROP_OFFSET, 1.0, 0.0, 0.0, 0.0);
         }
         else
         {
