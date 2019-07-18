@@ -60,6 +60,7 @@ hook OnGameModeInit()
 #include "vehicles-spawn"
 #include "vehicles-utils"
 #include "vehicles-surfing"
+#include "vehicles-spray"
 
 hook OnGameModeExit()
 {

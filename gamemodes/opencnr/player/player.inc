@@ -35,6 +35,7 @@ new playerData[MAX_PLAYERS][E_PLAYER];
 // Internal
 // -
 
+#include "player-wanted-level"
 #include <YSI\y_hooks>
 
 hook OnPlayerConnect(playerid)

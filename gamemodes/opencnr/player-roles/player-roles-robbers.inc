@@ -2,12 +2,6 @@
 // related game-features.
 
 // -
-// External Packages
-// -
-
-#include <PawnPlus>
-
-// -
 // Declarations
 // -
 
@@ -28,41 +22,11 @@ static Float:robberSpawnPositions[][] =
     {-2724.3762, -314.7364, 7.1861, 42.6638}
 };
 
-// Hooks
-static NativeHook:hookv_SetPlayerWantedLevel;
-
 // -
 // Internal
 // -
 
 #include <YSI\y_hooks>
-
-hook OnGameModeInit()
-{
-    // Adding hooks
-    hookv_SetPlayerWantedLevel = pawn_add_hook("SetPlayerWantedLevel", "dd", "hookf_SetPlayerWantedLevel");
-}
-
-hook OnGameModeExit()
-{
-    // Removing hooks
-    pawn_remove_hook(hookv_SetPlayerWantedLevel);
-}
-
-forward hookf_SetPlayerWantedLevel(playerid, level);
-public hookf_SetPlayerWantedLevel(playerid, level)
-{
-    if(level != 0)
-    {
-        SetPlayerColor(playerid, COLOR_ROBBER);
-    }
-    else
-    {
-        SetPlayerColor(playerid, COLOR_DEFAULT & ~0xFF);
-    }
-
-    return SetPlayerWantedLevel(playerid, level);
-}
 
 hook OnPlayerSetRole(playerid, role)
 {
