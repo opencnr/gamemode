@@ -11,6 +11,8 @@ services:
     depends_on:
       - samp_db                       # Mark container service 'samp_db' as dependency
     container_name: samp              # Container name
+    volumes:                          # Volume for runtime dependencies (Plugins, SA-MP server binaries)
+      - runtime-dependencies:/root/.samp
     environment:                      # Add environment variables
       MYSQL_HOST: samp_db             # Use container name 'samp_db' of container service 'samp_db' as database host
       MYSQL_USER: samp
@@ -30,6 +32,9 @@ services:
       MYSQL_USER: samp
       MYSQL_PASSWORD: db_password
       MYSQL_DATABASE: cnr
+
+volumes:
+  runtime-dependencies:               # Volume for runtime dependencies (Plugins, SA-MP server binaries)
 
 # Command to start all services at once
 # docker-compose up
