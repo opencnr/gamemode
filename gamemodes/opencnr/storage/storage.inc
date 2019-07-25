@@ -38,7 +38,7 @@ static connectionAttempts;
 
 hook OnGameModeInit()
 {
-    defer AttemptDatabaseConnection();
+    defer AttemptDatabaseConnection[100]();
     return 1;
 }
 
