@@ -4,7 +4,7 @@
 	"entry": "gamemodes/opencnr.pwn",
 	"output": "gamemodes/opencnr.amx",
 	"dependencies": [
-		"sampctl/samp-stdlib",
+		"sampctl/samp-stdlib:0.3.DL-R1",
 		"pawn-lang/YSI-Includes:v4.0.2",
 		"pBlueG/SA-MP-MySQL:R41-4",
 		"Awsomedude/easyDialog:2.0",
@@ -40,7 +40,8 @@
 				"gamemodes/opencnr/vehicles",
 				"gamemodes/opencnr/portals",
 				"gamemodes/opencnr/airdrop",
-				"gamemodes/opencnr/world"
+				"gamemodes/opencnr/world",
+				"gamemodes/opencnr/vending-machines"
 			],
 			"constants": {
 				"DEV_BUILD": "1"
@@ -60,13 +61,13 @@
 				"gamemodes/opencnr/player-nametag",
 				"gamemodes/opencnr/player-prison",
 				"gamemodes/opencnr/storage",
-				"gamemodes/opencnr/dev-tools",
 				"gamemodes/opencnr/businesses",
 				"gamemodes/opencnr/utils",
 				"gamemodes/opencnr/vehicles",
 				"gamemodes/opencnr/portals",
 				"gamemodes/opencnr/airdrop",
-				"gamemodes/opencnr/world"
+				"gamemodes/opencnr/world",
+				"gamemodes/opencnr/vending-machines"
 			]
 		}
 	],

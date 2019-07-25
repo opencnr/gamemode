@@ -57,6 +57,7 @@
 #include <businesses>
 #include <vehicles>
 #include <airdrop>
+#include <vending-machines>
 
 #if defined DEV_BUILD
     #include <dev-tools>
