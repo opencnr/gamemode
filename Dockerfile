@@ -10,9 +10,9 @@ WORKDIR /samp
 COPY pawn.json pawn.json
 RUN sampctl p ensure
 
-ARG build=dev
+ARG build=prod
 COPY . .
 RUN sampctl p build ${build}
 
-# Use the following command to build for production :
-# docker-compose build --build-arg build=prod 
+# Use the following command to build for development :
+# docker-compose build --build-arg build=dev
