@@ -17,7 +17,8 @@
 		"kristoisberg/samp-map-zones",
 		"Southclaws/progress2",
 		"IllidanS4/PawnPlus:v1.0.0",
-		"samp-incognito/samp-streamer-plugin:v2.9.4"
+		"samp-incognito/samp-streamer-plugin:v2.9.4",
+		"thecodeah/pawn-humanize:v1.1.1"
 	],
 	"builds": [
 		{
@@ -31,6 +32,7 @@
 				"gamemodes/opencnr/player-roles",
 				"gamemodes/opencnr/player-knockout",
 				"gamemodes/opencnr/player-class-selection",
+				"gamemodes/opencnr/player-statistics",
 				"gamemodes/opencnr/player-nametag",
 				"gamemodes/opencnr/player-prison",
 				"gamemodes/opencnr/storage",
@@ -58,6 +60,7 @@
 				"gamemodes/opencnr/player-roles",
 				"gamemodes/opencnr/player-knockout",
 				"gamemodes/opencnr/player-class-selection",
+				"gamemodes/opencnr/player-statistics",
 				"gamemodes/opencnr/player-nametag",
 				"gamemodes/opencnr/player-prison",
 				"gamemodes/opencnr/storage",

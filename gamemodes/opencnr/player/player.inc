@@ -22,6 +22,27 @@ enum E_PLAYER
 new playerData[MAX_PLAYERS][E_PLAYER];
 
 // -
+// API
+// -
+
+// GetPlayerID looks for and returns the playerid of a player using their
+// userid. Returns -1 if the user was not found.
+stock GetPlayerID(userid)
+{
+    new ret = -1;
+    foreach(new p : Player)
+    {
+        if(playerData[p][E_PLAYER_USER_ID] == userid)
+        {
+            ret = p;
+            break;
+        }
+    }
+
+    return ret;
+}
+
+// -
 // Internal Packages
 // -
 
@@ -30,6 +51,7 @@ new playerData[MAX_PLAYERS][E_PLAYER];
 #include <player-class-selection>
 #include <player-prison>
 #include <player-nametag>
+#include <player-statistics>
 
 // -
 // Internal

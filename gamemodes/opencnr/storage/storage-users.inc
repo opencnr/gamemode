@@ -14,16 +14,27 @@
 // OnUserLoaded is called after LoadUser retrieved user information.
 forward OnUserLoaded(playerid, userid, money);
 
+// OnUserCreated is called after a user has been created in the database using
+// CreateUser.
+forward OnUserCreated(userid);
+
 // CreateUser creates a new user in the database with the specified arguments.
 stock CreateUser(MySQL:handle, playerid, hash[])
 {
-    new query[175], playerName[MAX_PLAYER_NAME + 1];
+    new query[225], playerName[MAX_PLAYER_NAME + 1];
     GetPlayerName(playerid, playerName, sizeof playerName);
     mysql_format(handle, query, sizeof query,
-        "INSERT INTO `users` (`username`, `password`) VALUES ('%e', '%s')",
+        "INSERT INTO `users` (`username`, `password`) VALUES ('%e', '%s'); SELECT id FROM users ORDER BY id DESC LIMIT 1;",
         playerName, hash
     );
-    mysql_query(handle, query, false);
+    new Cache:cache = mysql_query(handle, query);
+
+    new userid;
+    cache_get_value_index_int(0, 0, userid);
+
+    cache_delete(cache);
+
+    CallLocalFunction("OnUserCreated", "d", userid);
 }
 
 // LoadUser retrieves the specified players user information from the database
@@ -54,7 +65,7 @@ stock StoreUser(MySQL:handle, userid, money, wanted_level)
         "UPDATE users SET `money`='%d', `wanted_level`='%d' WHERE `id`='%d';",
         money, wanted_level, userid
     );
-    mysql_query(handle, query);
+    mysql_query(handle, query, false);
 }
 
 // IsUserRegistered checks if the user is registered in the database.
@@ -100,3 +111,9 @@ stock GetUserWantedLevel(MySQL:handle, userid)
 
     return wanted_level;
 }
+
+// -
+// Internal
+// -
+
+#include "storage-user-stats"

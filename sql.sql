@@ -8,6 +8,20 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS user_stats;
+CREATE TABLE user_stats(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  kills int(11) DEFAULT 0,
+  deaths int(11) DEFAULT 0,
+  PRIMARY KEY (id),
+  UNIQUE(user_id),
+  FOREIGN KEY fk_user(user_id)
+    REFERENCES users(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
+
 DROP TABLE IF EXISTS `businesses`;
 CREATE TABLE `businesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
