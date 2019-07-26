@@ -9,6 +9,12 @@
 #include <YSI\y_timers>
 
 // -
+// Internal Packages
+// -
+
+#include <storage>
+
+// -
 // Declarations
 // -
 
@@ -19,12 +25,12 @@ enum E_PLAYER
     E_PLAYER_WANTED_LEVEL
 };
 
-// Player variables
-new playerData[MAX_PLAYERS][E_PLAYER];
-
 // -
 // API
 // -
+
+// playerData is an array that contains player data.
+new playerData[MAX_PLAYERS][E_PLAYER];
 
 // GetPlayerID looks for and returns the playerid of a player using their
 // userid. Returns -1 if the user was not found.
@@ -44,8 +50,10 @@ stock GetPlayerID(userid)
 }
 
 // -
-// Internal Packages
+// Internal
 // -
+
+#include "player-wanted-level"
 
 #include <player-roles>
 #include <player-knockout>
@@ -54,11 +62,17 @@ stock GetPlayerID(userid)
 #include <player-nametag>
 #include <player-statistics>
 
-// -
-// Internal
-// -
+static StorePlayerData(playerid)
+{
+    StoreUser(GetDBHandle(),
+        playerData[playerid][E_PLAYER_USER_ID],
+        playerData[playerid][E_PLAYER_MONEY],
+        playerData[playerid][E_PLAYER_WANTED_LEVEL]
+    );
+}
 
-#include "player-wanted-level"
+// - Hooks
+
 #include <YSI\y_hooks>
 
 hook OnPlayerConnect(playerid)
@@ -101,23 +115,16 @@ hook OnGameModeExit()
     return 1;
 }
 
-ptask StorePlayerDataTimer[2 * 60 * 1000](playerid)
-{
-    StorePlayerData(playerid);
-}
-
-static StorePlayerData(playerid)
-{
-    StoreUser(GetDBHandle(),
-        playerData[playerid][E_PLAYER_USER_ID],
-        playerData[playerid][E_PLAYER_MONEY],
-        playerData[playerid][E_PLAYER_WANTED_LEVEL]
-    );
-}
-
 hook OnPlayerSpawn(playerid)
 {
     SetPlayerInterior(playerid, 0);
     SetPlayerVirtualWorld(playerid, 0);
     return 1;
+}
+
+// - Timers
+
+ptask StorePlayerDataTimer[2 * 60 * 1000](playerid)
+{
+    StorePlayerData(playerid);
 }

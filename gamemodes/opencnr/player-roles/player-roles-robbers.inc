@@ -5,7 +5,9 @@
 // Declarations
 // -
 
-#define COLOR_ROBBER 0xFC6953FF
+#if !defined COLOR_ROBBER
+    #define COLOR_ROBBER 0xFC6953FF
+#endif
 
 static Float:robberSpawnPositions[][] =
 {

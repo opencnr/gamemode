@@ -33,11 +33,13 @@
 #define COLOR_INFO      0x2ABAFCFF
 #define COLOR_DEFAULT   0xA9C4E4FF
 #define COLOR_DEFAULT2  0xB9C9BFFF
+#define COLOR_ROBBER    0xFC6953FF
 
 #define SCOLOR_ERROR    "{FC3F3F}"
 #define SCOLOR_INFO     "{2ABAFC}"
 #define SCOLOR_DEFAULT  "{A9C4E4}"
 #define SCOLOR_DEFAULT2 "{B9C9BF}"
+#define SCOLOR_ROBBER   "{FC6953}"
 
 // -
 // Externals

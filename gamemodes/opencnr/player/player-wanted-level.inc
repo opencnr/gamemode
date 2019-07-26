@@ -11,12 +11,14 @@
 // Declarations
 // -
 
-// Hooks
+// - Hooks
 static NativeHook:hookv_SetPlayerWantedLevel;
 
 // -
 // Internal
 // -
+
+// - Hooks
 
 #include <YSI\y_hooks>
 
