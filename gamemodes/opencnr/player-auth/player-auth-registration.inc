@@ -46,6 +46,10 @@ public OnPasswordHash(playerid)
 {
     new hash[60 + 1];
     bcrypt_get_hash(hash);
-    CreateUser(db_handle, playerid, hash);
+    if(!CreateUser(GetDBHandle(), playerid, hash))
+    {
+        SendClientMessage(playerid, COLOR_ERROR, "Failed to create user... Please try again later.");
+        Kick(playerid);
+    }
     CallLocalFunction("OnPlayerAuthenticated", "d", playerid);
 }

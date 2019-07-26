@@ -21,7 +21,14 @@ forward OnPlayerAuthenticated(playerid);
 // depending on whether the user is registered or not.
 stock PromptAuthentication(playerid)
 {
-    if(IsUserRegistered(db_handle, playerid))
+    new bool:userRegistered;
+    if(!IsUserRegistered(GetDBHandle(), playerid, userRegistered))
+    {
+        SendClientMessage(playerid, COLOR_ERROR, "Something went wrong... Please try again later.");
+        Kick(playerid);
+    }
+
+    if(userRegistered)
     {
         PromptLoginDialog(playerid);
     }
@@ -60,6 +67,5 @@ hook OnPlayerConnect(playerid)
 hook OnPlayerAuthenticated(playerid)
 {
     isPlayerAuthenticated[playerid] = true;
-    LoadUser(db_handle, playerid);
     return 1;
 }

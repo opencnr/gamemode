@@ -44,7 +44,11 @@ Dialog:OnLoginDialog(playerid, response, listitem, inputtext[])
     if(response)
     {
         new hash[60 + 1];
-        GetUserHash(db_handle, playerid, hash, sizeof hash);
+        if(!GetUserHash(GetDBHandle(), playerid, hash, sizeof hash))
+        {
+            SendClientMessage(playerid, COLOR_ERROR, "Something went wrong... Please try again later.");
+            Kick(playerid);
+        }
         bcrypt_verify(playerid, "OnPasswordVerify", inputtext, hash);
     }
     else

@@ -49,5 +49,6 @@ public hookf_SetPlayerWantedLevel(playerid, level)
         SetPlayerColor(playerid, COLOR_DEFAULT & ~0xFF);
     }
 
+    playerData[playerid][E_PLAYER_WANTED_LEVEL] = level;
     return SetPlayerWantedLevel(playerid, level);
 }

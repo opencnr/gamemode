@@ -53,7 +53,7 @@ hook OnPlayerSpawn(playerid)
 
 hook OnPlayerAuthenticated(playerid)
 {
-    new wantedLevel = GetUserWantedLevel(db_handle, playerData[playerid][E_PLAYER_USER_ID]);
+    new wantedLevel = playerData[playerid][E_PLAYER_WANTED_LEVEL];
     
     if(wantedLevel > 0)
     {

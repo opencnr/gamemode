@@ -40,7 +40,7 @@ stock playerStatistics[MAX_PLAYERS][E_PLAYER_STATS];
 
 hook OnPlayerAuthenticated(playerid)
 {
-    LoadUserStatistics(db_handle, playerData[playerid][E_PLAYER_USER_ID]);
+    LoadUserStatistics(GetDBHandle(), playerData[playerid][E_PLAYER_USER_ID]);
     return 1;
 }
 
@@ -58,7 +58,7 @@ hook OnUserStatisticsLoaded(userid, kills, deaths)
 
 hook OnPlayerDisconnect(playerid, reason)
 {
-    StoreUserStatistics(db_handle, playerData[playerid][E_PLAYER_USER_ID],
+    StoreUserStatistics(GetDBHandle(), playerData[playerid][E_PLAYER_USER_ID],
         playerStatistics[playerid][E_PLAYER_STATS_KILLS],
         playerStatistics[playerid][E_PLAYER_STATS_DEATHS]
     );

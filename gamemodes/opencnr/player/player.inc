@@ -15,7 +15,8 @@
 enum E_PLAYER
 {
     E_PLAYER_USER_ID,
-    E_PLAYER_MONEY
+    E_PLAYER_MONEY,
+    E_PLAYER_WANTED_LEVEL
 };
 
 // Player variables
@@ -66,16 +67,22 @@ hook OnPlayerConnect(playerid)
     SendClientMessage(playerid, COLOR_DEFAULT, "This server runs on "SCOLOR_DEFAULT2"OpenCnR "OPENCNR_VERSION);
 
     // Initializing and resetting player variables.
-    LoadUser(db_handle, playerid);
+    if(!LoadUser(GetDBHandle(), playerid))
+    {
+        SendClientMessage(playerid, COLOR_ERROR, "Something went wrong... Please try again later.");
+        Kick(playerid);
+    }
 
     SetPlayerColor(playerid, COLOR_DEFAULT & ~0xFF);
     return 1;
 }
 
-hook OnUserLoaded(playerid, userid, money)
+hook OnUserLoaded(playerid, userid, money, wantedLevel)
 {
     playerData[playerid][E_PLAYER_USER_ID] = userid;
     playerData[playerid][E_PLAYER_MONEY] = money;
+    playerData[playerid][E_PLAYER_WANTED_LEVEL] = wantedLevel;
+
     return 1;
 }
 
@@ -101,10 +108,10 @@ ptask StorePlayerDataTimer[2 * 60 * 1000](playerid)
 
 static StorePlayerData(playerid)
 {
-    StoreUser(db_handle,
+    StoreUser(GetDBHandle(),
         playerData[playerid][E_PLAYER_USER_ID],
         playerData[playerid][E_PLAYER_MONEY],
-        GetPlayerWantedLevel(playerid)
+        playerData[playerid][E_PLAYER_WANTED_LEVEL]
     );
 }
 

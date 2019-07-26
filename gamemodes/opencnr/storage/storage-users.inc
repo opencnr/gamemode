@@ -11,53 +11,73 @@
 // API
 // -
 
-// OnUserLoaded is called after LoadUser retrieved user information.
-forward OnUserLoaded(playerid, userid, money);
-
 // OnUserCreated is called after a user has been created in the database using
 // CreateUser.
-forward OnUserCreated(userid);
+forward OnUserCreated(MySQL:handle, userid);
+
+// OnUserLoaded is called after LoadUser retrieved user information.
+forward OnUserLoaded(playerid, userid, money, wantedLevel);
 
 // CreateUser creates a new user in the database with the specified arguments.
+// Returns 1 on success, 0 on failure.
 stock CreateUser(MySQL:handle, playerid, hash[])
 {
-    new query[225], playerName[MAX_PLAYER_NAME + 1];
+    new query[300], playerName[MAX_PLAYER_NAME + 1];
     GetPlayerName(playerid, playerName, sizeof playerName);
     mysql_format(handle, query, sizeof query,
-        "INSERT INTO `users` (`username`, `password`) VALUES ('%e', '%s'); SELECT id FROM users ORDER BY id DESC LIMIT 1;",
+        "INSERT INTO `users` (`username`, `password`) VALUES ('%e', '%s');",
         playerName, hash
     );
-    new Cache:cache = mysql_query(handle, query);
+    mysql_query(handle, query, false);
+    
+    if(mysql_errno() != 0)
+    {
+        printf("[ERROR] CreateUser query failed [handle:%d, playerid:%d, hash:%s]", _:handle, playerid, hash);
+        return 0;
+    }
 
+    new Cache:cache = mysql_query(handle, "SELECT id FROM users ORDER BY id DESC LIMIT 1;");
     new userid;
     cache_get_value_index_int(0, 0, userid);
-
     cache_delete(cache);
 
-    CallLocalFunction("OnUserCreated", "d", userid);
+    CallLocalFunction("OnUserCreated", "dd", _:handle, userid);
+    return 1;
 }
 
 // LoadUser retrieves the specified players user information from the database
 // and calls OnUserLoaded with that information when finished.
 // If you want to retrieve the users password hash, use GetUserHash instead.
+// Returns 1 on success, 0 on failure.
 stock LoadUser(MySQL:handle, playerid)
 {
-    new query[75], playerName[MAX_PLAYER_NAME + 1];
+    new playerName[MAX_PLAYER_NAME + 1];
     GetPlayerName(playerid, playerName, sizeof playerName);
+
+    new query[75];
     mysql_format(handle, query, sizeof query, "SELECT * FROM `users` WHERE `username` = '%e'", playerName);
     new Cache:cache = mysql_query(handle, query);
 
-    new userid, money;
+    new userid, money, wantedLevel;
     cache_get_value_name_int(0, "id", userid);
     cache_get_value_name_int(0, "money", money);
+    cache_get_value_name_int(0, "wanted_level", wantedLevel);
 
     cache_delete(cache);
 
-    CallLocalFunction("OnUserLoaded", "ddd", playerid, userid, money);
+    if(mysql_errno() != 0)
+    {
+        printf("[ERROR] LoadUser query failed [handle:%d, playerid:%d]", _:handle, playerid);
+        return 0;
+    }
+
+    CallLocalFunction("OnUserLoaded", "dddd", playerid, userid, money, wantedLevel);
+    return 1;
 }
 
 // StoreUser updates the users information in the database with the information
 // specified by arguments.
+// Returns 1 on success, 0 on failure.
 stock StoreUser(MySQL:handle, userid, money, wanted_level)
 {
     new query[100];
@@ -66,50 +86,63 @@ stock StoreUser(MySQL:handle, userid, money, wanted_level)
         money, wanted_level, userid
     );
     mysql_query(handle, query, false);
+
+    if(mysql_errno() != 0)
+    {
+        printf("[ERROR] StoreUser query failed [handle:%d, userid:%d]", _:handle, userid);
+        return 0;
+    }
+
+    return 1;
 }
 
 // IsUserRegistered checks if the user is registered in the database.
-stock IsUserRegistered(MySQL:handle, playerid)
+// Returns 1 on success, 0 on failure.
+stock IsUserRegistered(MySQL:handle, playerid, &bool:result)
 {
-    new query[100], playerName[MAX_PLAYER_NAME + 1], isRegistered;
+    new playerName[MAX_PLAYER_NAME + 1];
     GetPlayerName(playerid, playerName, sizeof playerName);
+
+    new query[100];
     mysql_format(handle, query, sizeof query, "SELECT COUNT(*) FROM `users` WHERE `username` = '%e' LIMIT 1;", playerName);
     new Cache:cache = mysql_query(handle, query);
 
-    cache_get_value_index_int(0, 0, isRegistered);
+    cache_get_value_index_int(0, 0, result);
 
     cache_delete(cache);
 
-    return isRegistered;
+    if(mysql_errno() != 0)
+    {
+        printf("[ERROR] IsUserRegistered query failed [handle:%d, playerid:%d]", _:handle, playerid);
+        return 0;
+    }
+
+    return 1;
 }
 
 // GetUserHash retrieves the users password hash and passes it by reference to
 // the dest[] argument.
+// Returns 1 on success, 0 on failure.
 stock GetUserHash(MySQL:handle, playerid, dest[], maxLength = sizeof dest)
 {
-    new query[100], playerName[MAX_PLAYER_NAME + 1];
+    new playerName[MAX_PLAYER_NAME + 1];
     GetPlayerName(playerid, playerName, sizeof playerName);
+    
+    new query[100];
     mysql_format(handle, query, sizeof query, "SELECT `password` FROM `users` WHERE `username` = '%e';", playerName);
     new Cache:cache = mysql_query(handle, query);
 
     cache_get_value_index(0, 0, dest, maxLength);
 
     cache_delete(cache);
-}
 
-// GetUserWantedLevel retrieves the users wanted level from the database and
-// returns it.
-stock GetUserWantedLevel(MySQL:handle, userid)
-{
-    new query[75], wanted_level;
-    mysql_format(handle, query, sizeof query, "SELECT `wanted_level` FROM `users` WHERE `id` = '%d';", userid);
-    new Cache:cache = mysql_query(handle, query);
+    if(mysql_errno() != 0)
+    {
+        printf("[ERROR] GetUserHash query failed [handle:%d, playerid:%d]", _:handle, playerid);
+        return 0;
+    }
 
-    cache_get_value_index_int(0, 0, wanted_level);
-
-    cache_delete(cache);
-
-    return wanted_level;
+    return 1;
 }
 
 // -

@@ -78,7 +78,7 @@ stock IsPlayerInsideBusiness(playerid)
 
 hook OnDatabaseConnected()
 {
-    LoadBusinesses(db_handle);
+    LoadBusinesses(GetDBHandle());
     return 1;
 }
 
