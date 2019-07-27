@@ -197,6 +197,33 @@ OpenCnR uses PawnPlus to hook natives during run-time rather than hooking them d
         return something;
     }
     ```
+3. Add hook on game-mode initialization and remove hook on game-mode exit.
+    ```C
+    // -
+    // Internal
+    // -
+    
+    // - Hooks
+
+    #include <YSI\y_hooks>
+
+    hook OnGameModeInit()
+    {
+        // Add hooks
+        hookv_NativeName = pawn_add_hook("NativeName", "ddd", "hookf_NativeName"); // "ddd" are the arguments the function takes.
+        
+        return 1;
+    }
+
+    hook OnGameModeExit()
+    {
+        // Remove hooks
+        pawn_remove_hook(hookv_NativeName);
+
+        return 1;
+    }
+    ```
+
 For more information about Native Hooks, check the PawnPlus documentation...
 
 ## Storage
