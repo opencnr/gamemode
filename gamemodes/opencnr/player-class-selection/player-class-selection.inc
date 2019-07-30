@@ -5,7 +5,7 @@
 // External Packages
 // -
 
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Internal Packages
@@ -19,7 +19,7 @@
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerRequestClass(playerid, classid)
 {

@@ -52,7 +52,7 @@ forward OnPlayerAimAtClerk(playerid, actorid);
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {

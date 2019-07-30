@@ -4,6 +4,18 @@
 // API
 // -
 
+#define HOLDING(%0) \
+    ((newkeys & (%0)) == (%0))
+
+#define PRESSED(%0) \
+    (((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
+
+#define PRESSING(%0,%1) \
+    (%0 & (%1))
+
+#define RELEASED(%0) \
+    (((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
+
 // GetDistanceBetweenPoints returns the distance between the two specified
 // coordinates.
 stock Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2)

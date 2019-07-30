@@ -5,7 +5,7 @@
 // -
 
 #include <streamer>
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 #include <PickupEx>
 
 // -
@@ -54,7 +54,7 @@ static
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnGameModeInit()
 {

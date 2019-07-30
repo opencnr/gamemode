@@ -36,7 +36,7 @@ stock playerStatistics[MAX_PLAYERS][E_PLAYER_STATS];
 
 // - Hooks
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerAuthenticated(playerid)
 {

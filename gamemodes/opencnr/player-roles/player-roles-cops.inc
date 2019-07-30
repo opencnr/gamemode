@@ -14,7 +14,7 @@
 // -
 
 #include <YSI\y_iterate>
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Declarations
@@ -48,7 +48,7 @@ stock IsPoliceVehicle(vehicleid)
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerSetRole(playerid, role)
 {

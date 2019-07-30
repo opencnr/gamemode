@@ -5,7 +5,13 @@
 // External Packages
 // -
 
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
+
+// -
+// Internal Packages
+// -
+
+#include <utils>
 
 // -
 // Declarations
@@ -50,7 +56,7 @@ stock RevivePlayer(playerid)
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnGameModeInit()
 {

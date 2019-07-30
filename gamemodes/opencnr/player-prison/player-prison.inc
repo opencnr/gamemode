@@ -12,7 +12,7 @@
 // External Packages
 // -
 
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Declarations
@@ -65,7 +65,7 @@ stock PutPlayerInPrison(playerid)
 // Internals
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {

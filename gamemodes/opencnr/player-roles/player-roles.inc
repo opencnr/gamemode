@@ -84,7 +84,7 @@ stock GetRolePlayerCount(roleID)
 
 #include "player-roles-cops"
 #include "player-roles-robbers"
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {

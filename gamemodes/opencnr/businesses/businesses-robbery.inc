@@ -5,7 +5,7 @@
 // -
 
 #include <map-zones>
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Declarations
@@ -29,7 +29,7 @@ static PlayerBar:playerRobberyProgressbar[MAX_PLAYERS];
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {

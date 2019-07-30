@@ -5,7 +5,7 @@
 	"output": "gamemodes/opencnr.amx",
 	"dependencies": [
 		"sampctl/samp-stdlib:0.3.DL-R1",
-		"pawn-lang/YSI-Includes:v4.0.2",
+		"pawn-lang/YSI-Includes@5.x",
 		"pBlueG/SA-MP-MySQL:R41-4",
 		"Awsomedude/easyDialog:2.0",
 		"maddinat0r/samp-mysql-yinline-include:v1.0.1",

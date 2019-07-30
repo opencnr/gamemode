@@ -4,23 +4,11 @@
 // External Packages
 // -
 
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Internal
 // -
-
-#include <YSI\y_hooks>
-
-hook OnGameModeInit()
-{
-    UpdateWorldTime();
-}
-
-task UpdateWorldTimeTask[60 * 1000]()
-{
-    UpdateWorldTime();
-}
 
 static UpdateWorldTime()
 {
@@ -28,4 +16,20 @@ static UpdateWorldTime()
     gettime(hour, minute, second);
 
     SetWorldTime(hour);
+}
+
+// - Timers
+
+task UpdateWorldTimeTask[60 * 1000]()
+{
+    UpdateWorldTime();
+}
+
+// - Hooks
+
+#include <YSI_Coding\y_hooks>
+
+hook OnGameModeInit()
+{
+    UpdateWorldTime();
 }

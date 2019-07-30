@@ -1,52 +1,74 @@
+// OpenCnR is a collaborative open-source SA-MP Cops and Robbers game-mode!
+
+// -
+// External Packages
+// -
+
 #include <a_samp>
+#include <sscanf2>
+#include <progress2>
 
 // -
-// Compiletime Configuration
+// API
 // -
 
-#undef MAX_PLAYERS
-#define MAX_PLAYERS (32)
+#define YSI_NO_HEAP_MALLOC
 
 #define OPENCNR_VERSION "Alpha R1"
 
-// -
-// Macros
-// -
+#if !defined MAX_PLAYERS
+    #define MAX_PLAYERS (32)
+#endif
 
-#define HOLDING(%0) \
-    ((newkeys & (%0)) == (%0))
+// - Colors
 
-#define PRESSED(%0) \
-    (((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
+// COLOR_ERROR is the color used to display error messages.
+#if !defined COLOR_ERROR
+    #define COLOR_ERROR 0xFC3F3FFF
+#endif
+// SCOLOR_ERROR is the string version of COLOR_ERROR.
+#if !defined SCOLOR_ERROR
+    #define SCOLOR_ERROR "{FC3F3F}"
+#endif
 
-#define PRESSING(%0,%1) \
-    (%0 & (%1))
+// COLOR_INFO is the color used to display informative messages.
+#if !defined COLOR_INFO
+    #define COLOR_INFO 0x2ABAFCFF
+#endif
+// SCOLOR_INFO is the string version of COLOR_INFO.
+#if !defined SCOLOR_INFO
+    #define SCOLOR_INFO "{2ABAFC}"
+#endif
 
-#define RELEASED(%0) \
-    (((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
+// COLOR_DEFAULT is the "default" blue-like SA-MP color used in the "Connecting
+// to" message when joining a server.
+#if !defined COLOR_DEFAULT
+    #define COLOR_DEFAULT 0xA9C4E4FF
+#endif
+// SCOLOR_DEFAULT is the string version of COLOR_DEFAULT.
+#if !defined SCOLOR_DEFAULT
+    #define SCOLOR_DEFAULT "{A9C4E4}"
+#endif
 
-// -
-// Colors
-// -
+// COLOR_DEFAULT2 is the "default" white-like SA-MP color used in the
+// "Connecting to" message when joining a server.
+#if !defined COLOR_DEFAULT2
+    #define COLOR_DEFAULT2 0xB9C9BFFF
+#endif
+// SCOLOR_DEFAULT2 is the string version of COLOR_DEFAULT2.
+#if !defined SCOLOR_DEFAULT2
+    #define SCOLOR_DEFAULT2 "{B9C9BF}"
+#endif
 
-#define COLOR_ERROR     0xFC3F3FFF
-#define COLOR_INFO      0x2ABAFCFF
-#define COLOR_DEFAULT   0xA9C4E4FF
-#define COLOR_DEFAULT2  0xB9C9BFFF
-#define COLOR_ROBBER    0xFC6953FF
-
-#define SCOLOR_ERROR    "{FC3F3F}"
-#define SCOLOR_INFO     "{2ABAFC}"
-#define SCOLOR_DEFAULT  "{A9C4E4}"
-#define SCOLOR_DEFAULT2 "{B9C9BF}"
-#define SCOLOR_ROBBER   "{FC6953}"
-
-// -
-// Externals
-// -
-
-#include <sscanf2>
-#include <progress2>
+// COLOR_ROBBER is the color a player will become as a robber. Used for minimap,
+// map and username / nickname.
+#if !defined COLOR_ROBBER
+    #define COLOR_ROBBER 0xFC6953FF
+#endif
+// SCOLOR_ROBBER is the string version of COLOR_ROBBER.
+#if !defined SCOLOR_ROBBER
+    #define SCOLOR_ROBBER "{FC6953}"
+#endif
 
 // -
 // Internal
@@ -65,13 +87,12 @@
     #include <dev-tools>
 #endif
 
-#include <YSI\y_hooks>
-
-hook OnGameModeInit()
+public OnGameModeInit()
 {
     SetGameModeText("OpenCnR "OPENCNR_VERSION);
     EnableStuntBonusForAll(0);
     UsePlayerPedAnims();
+
     return 1;
 }
 

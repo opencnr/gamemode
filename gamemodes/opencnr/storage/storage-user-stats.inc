@@ -89,7 +89,7 @@ stock StoreUserStatistics(MySQL:handle, userid, kills, deaths)
 
 // - Hooks
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnUserCreated(MySQL:handle, userid)
 {

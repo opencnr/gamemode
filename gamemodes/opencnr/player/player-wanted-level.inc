@@ -2,40 +2,14 @@
 // players wanted level.
 
 // -
-// External Packages
-// -
-
-#include <PawnPlus>
-
-// -
-// Declarations
-// -
-
-// - Hooks
-static NativeHook:hookv_SetPlayerWantedLevel;
-
-// -
 // Internal
 // -
 
 // - Hooks
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
-hook OnGameModeInit()
-{
-    // Adding hooks
-    hookv_SetPlayerWantedLevel = pawn_add_hook("SetPlayerWantedLevel", "dd", "hookf_SetPlayerWantedLevel");
-}
-
-hook OnGameModeExit()
-{
-    // Removing hooks
-    pawn_remove_hook(hookv_SetPlayerWantedLevel);
-}
-
-forward hookf_SetPlayerWantedLevel(playerid, level);
-public hookf_SetPlayerWantedLevel(playerid, level)
+hook function SetPlayerWantedLevel(playerid, level)
 {
     if(level < 0)
     {
@@ -52,5 +26,5 @@ public hookf_SetPlayerWantedLevel(playerid, level)
     }
 
     playerData[playerid][E_PLAYER_WANTED_LEVEL] = level;
-    return SetPlayerWantedLevel(playerid, level);
+    return continue(playerid, level);
 }

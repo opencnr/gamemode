@@ -1,4 +1,4 @@
-// Spawns vehicles around the map on gamemode initialization.
+// vehicles-spawn spawns vehicles around the map on gamemode initialization.
 
 // -
 // External Packages
@@ -8,18 +8,34 @@
 #include <sscanf2>
 
 // -
+// API
+// -
+
+// VEHICLES_SPAWN_INFO_DIRECTORY is the directory containing files that contain
+// vehicle spawn point data.
+//
+// Example line : 548,314.9759,2046.6259,19.2481,157.8634,1,1 ; Cargobob
+// Format : model,x,y,z,angle,color1,color2 ; comment
+//
+#if !defined VEHICLES_SPAWN_INFO_DIRECTORY
+    #define VEHICLES_SPAWN_INFO_DIRECTORY "scriptfiles/vehicles/"
+#endif
+
+// -
 // Internal
 // -
 
-#include <YSI\y_hooks>
+// - Hooks
+
+#include <YSI_Coding\y_hooks>
 
 hook OnGameModeInit()
 {
-    loadVehiclesFromDirectory("scriptfiles/vehicles/");
-    return Y_HOOKS_CONTINUE_RETURN_1;
+    loadVehiclesFromDirectory(VEHICLES_SPAWN_INFO_DIRECTORY);
+    return 1;
 }
 
-loadVehiclesFromDirectory(directory[])
+static loadVehiclesFromDirectory(directory[])
 {
     new
         Directory:directoryHandle = OpenDir(directory),
@@ -49,7 +65,7 @@ loadVehiclesFromDirectory(directory[])
     return 1;
 }
 
-loadVehiclesFromFile(file[])
+static loadVehiclesFromFile(file[])
 {
     new File:fileHandle = fopen(file);
 

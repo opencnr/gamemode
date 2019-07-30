@@ -96,7 +96,7 @@ stock ToggleGodMode(playerid, bool:toggle)
 // Internal
 // -
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {

@@ -6,7 +6,7 @@
 // -
 
 #include <YSI\y_iterate>
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Internal Packages
@@ -73,7 +73,7 @@ static StorePlayerData(playerid)
 
 // - Hooks
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {

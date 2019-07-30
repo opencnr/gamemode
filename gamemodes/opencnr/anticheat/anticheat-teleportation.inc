@@ -6,8 +6,7 @@
 // -
 
 #include <Pawn.CMD>
-#include <YSI\y_timers>
-#include <PawnPlus>
+#include <YSI_Coding\y_timers>
 
 // -
 // Declarations
@@ -23,10 +22,6 @@ static enum E_PLAYER_POSITION
 // Player variables
 static previousPlayerPosition[MAX_PLAYERS][E_PLAYER_POSITION];
 static bool:justTeleported[MAX_PLAYERS];
-
-// Hooks
-static NativeHook:hookv_SetPlayerPos;
-static NativeHook:hookv_PutPlayerInVehicle;
 
 // -
 // Internal Packages
@@ -45,46 +40,11 @@ forward OnPlayerPosSet(playerid);
 // Internal
 // -
 
-#include <YSI\y_hooks>
-
-hook OnGameModeInit()
-{
-    // Add hooks
-    hookv_SetPlayerPos = pawn_add_hook("SetPlayerPos", "dfff", "hookf_SetPlayerPos");
-    hookv_PutPlayerInVehicle = pawn_add_hook("PutPlayerInVehicle", "ddd", "hookf_PutPlayerInVehicle");
-}
-
-hook OnGameModeExit()
-{
-    // Remove hooks
-    pawn_remove_hook(hookv_SetPlayerPos);
-    pawn_remove_hook(hookv_PutPlayerInVehicle);
-}
-
-hook OnPlayerConnect(playerid)
-{
-    // Initialize and reset player variables.
-    previousPlayerPosition[playerid][E_PLAYER_POSITION_X] = 0.0;
-    previousPlayerPosition[playerid][E_PLAYER_POSITION_Y] = 0.0;
-    previousPlayerPosition[playerid][E_PLAYER_POSITION_Z] = 0.0;
-    justTeleported[playerid] = false;
-
-    return 1;
-}
-
 static UpdatePreviousPlayerPosition(playerid, Float:x, Float:y, Float:z)
 {
     previousPlayerPosition[playerid][E_PLAYER_POSITION_X] = x;
     previousPlayerPosition[playerid][E_PLAYER_POSITION_Y] = y;
     previousPlayerPosition[playerid][E_PLAYER_POSITION_Z] = z;
-}
-
-hook OnPlayerSpawn(playerid)
-{
-    new Float:x, Float:y, Float:z;
-    GetPlayerPos(playerid, x, y, z);
-    UpdatePreviousPlayerPosition(playerid, x, y, z);
-    return 1;
 }
 
 ptask CheckDistanceMoved[2500](playerid)
@@ -123,10 +83,32 @@ ptask CheckDistanceMoved[2500](playerid)
     UpdatePreviousPlayerPosition(playerid, x, y, z);
 }
 
-forward hookf_SetPlayerPos(playerid, Float:x, Float:y, Float:z);
-public hookf_SetPlayerPos(playerid, Float:x, Float:y, Float:z)
+// - Hooks
+
+#include <YSI_Coding\y_hooks>
+
+hook OnPlayerConnect(playerid)
 {
-    new returnValue = SetPlayerPos(playerid, x, y, z);
+    // Initialize and reset player variables.
+    previousPlayerPosition[playerid][E_PLAYER_POSITION_X] = 0.0;
+    previousPlayerPosition[playerid][E_PLAYER_POSITION_Y] = 0.0;
+    previousPlayerPosition[playerid][E_PLAYER_POSITION_Z] = 0.0;
+    justTeleported[playerid] = false;
+
+    return 1;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    UpdatePreviousPlayerPosition(playerid, x, y, z);
+    return 1;
+}
+
+hook function SetPlayerPos(playerid, Float:x, Float:y, Float:z)
+{
+    new returnValue = continue(playerid, x, y, z);
     if(returnValue)
     {
         UpdatePreviousPlayerPosition(playerid, x, y, z);
@@ -137,10 +119,9 @@ public hookf_SetPlayerPos(playerid, Float:x, Float:y, Float:z)
     return returnValue;
 }
 
-forward hookf_PutPlayerInVehicle(playerid, vehicleid, seatid);
-public hookf_PutPlayerInVehicle(playerid, vehicleid, seatid)
+hook function PutPlayerInVehicle(playerid, vehicleid, seatid)
 {
-    new returnValue = PutPlayerInVehicle(playerid, vehicleid, seatid);
+    new returnValue = continue(playerid, vehicleid, seatid);
     if(returnValue)
     {
         new Float:x, Float:y, Float:z;

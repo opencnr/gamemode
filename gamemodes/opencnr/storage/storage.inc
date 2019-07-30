@@ -6,7 +6,7 @@
 
 #include <a_mysql>
 #include <env>
-#include <YSI\y_timers>
+#include <YSI_Coding\y_timers>
 
 // -
 // Declarations
@@ -105,7 +105,7 @@ timer AttemptDatabaseConnection[DB_CONNECTION_INTERVAL]()
 
 // - Hooks
 
-#include <YSI\y_hooks>
+#include <YSI_Coding\y_hooks>
 
 hook OnGameModeInit()
 {

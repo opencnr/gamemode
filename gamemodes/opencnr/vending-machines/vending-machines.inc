@@ -5,8 +5,6 @@
 // Declaration
 // -
 
-#define VENDING_MACHINE_INTERVAL    3
-
 static const Float:vendingMachinePoints[][3] =
 {
     {-14.70, 1175.36, 18.95},     {201.02, -107.62, 0.90},
@@ -48,15 +46,42 @@ static const Float:vendingMachinePoints[][3] =
     {501.83, -1.43, 1000.73},     {2576.70, -1284.43, 1061.09}
 };
 
-// Player variables
+// - Player variables
 
 static playerVendingMachineLastUsage[MAX_PLAYERS];
+
+// -
+// API
+// -
+
+// VENDING_MACHINE_INTERVAL is the the time in seconds before you can use a
+// vending machine again.
+#if !defined VENDING_MACHINE_INTERVAL
+    #define VENDING_MACHINE_INTERVAL 3
+#endif
 
 // -
 // Internal
 // -
 
-#include <YSI\y_hooks>
+static IsPlayerNearVendingMachine(playerid)
+{
+    new ret;
+    for(new i = 0; i < sizeof vendingMachinePoints; i++)
+    {
+        if(IsPlayerInRangeOfPoint(playerid, 2.0, vendingMachinePoints[i][0], vendingMachinePoints[i][1], vendingMachinePoints[i][2]))
+        {
+            ret = true;
+            break;
+        }
+    }
+
+    return ret;
+}
+
+// - Hooks
+
+#include <YSI_Coding\y_hooks>
 
 hook OnPlayerConnect(playerid)
 {
@@ -86,19 +111,4 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     }
 
     return 1;
-}
-
-static IsPlayerNearVendingMachine(playerid)
-{
-    new ret;
-    for(new i = 0; i < sizeof vendingMachinePoints; i++)
-    {
-        if(IsPlayerInRangeOfPoint(playerid, 2.0, vendingMachinePoints[i][0], vendingMachinePoints[i][1], vendingMachinePoints[i][2]))
-        {
-            ret = true;
-            break;
-        }
-    }
-
-    return ret;
 }

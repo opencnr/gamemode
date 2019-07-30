@@ -4,7 +4,9 @@
 // Internal
 // -
 
-#include <YSI\y_hooks>
+// - Hooks
+
+#include <YSI_Coding\y_hooks>
 
 hook OnGameModeInit()
 {
